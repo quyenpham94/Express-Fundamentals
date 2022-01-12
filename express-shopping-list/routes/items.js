@@ -1,11 +1,11 @@
 const Item = require('../item');
 const express = require('express');
-
-const router = express.Router();
+const ExpressError = require('../expressError');
+const router = new express.Router();
 
 
 // get item from shopping list
-router.get('', (req, res, next) => {
+router.get('/', (req, res, next) => {
     try {
         return res.json({ items: Item.findAll() });
     } catch(err) {
@@ -15,7 +15,7 @@ router.get('', (req, res, next) => {
 
 
 // post name and price of new item to shopping list
-router.post('', (req, res, next) => {
+router.post('/', (req, res, next) => {
     try {
         let newItem = new Item(req.body.name, req.body.price);
         return res.json({item: newItem});
